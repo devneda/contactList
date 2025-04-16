@@ -22,7 +22,32 @@ app.get('/contacts', async (req, res) => {
     res.status(200).json(contacts);
 });
 
-// TODO Realizar mas operaciones de tipo PUT POST y DELETE
+// Operacion GET para obtener un contacto por su ID
+app.get('/contacts/:contactId', async (req, res) => {
+    const contact = await db('contacts').select('*').where({id: req.params.contactId}).first();
+    res.status(200).json(contact);
+});
+
+// Operacion PUT para actualizar un contacto por su ID
+app.put('/contacts/:contactId', async (req, res) =>{
+    await db('contacts').where({id: req.params.contactId}).update({
+        id: req.body.id,
+        name: req.body.name,
+        lastname: req.body.lastname,
+        phone: req.body.phone,
+        email: req.body.email,
+        birthday: req.body.birthday,
+        favorite: req.body.favorite
+    });
+    res.status(201).json({});
+});
+
+// Operacion DEL para eliminar un cntacto por su ID
+app.delete('/contacts/:contactId', async (req, res) => {
+    const id = req.params.contactId;
+    await db('contacts').del().where({id: id});
+    res.status(204).json({});
+});
 
 app.listen(port, () => {
     console.log('El backend ha iniciado en el puerto ' + port + '.')
