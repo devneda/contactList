@@ -1,6 +1,6 @@
 import axios from 'axios';
-import { notifyError, notifyOk} from './dialogUtil.js';
-import { el } from './documentUtil.js';
+import { notifyError, notifyOk} from '../scripts/dialogUtils.js';
+import { el } from '../scripts/documentUtils.js';
 
 window.addContact = function() {
     const name = el('name').value;
@@ -8,7 +8,7 @@ window.addContact = function() {
     const phone = el('phone').value;
     const email = el('email').value;
     const birthday = el('birthday').value;
-    const image = el('image').value;
+    const image = el('image').files[0];
 
     // Validacion de datos si ha insertado nombre del contacto
     if ( name === '' ) {
