@@ -1,0 +1,41 @@
+import axios from 'axios';
+import { notifyError, notifyOk} from './dialogUtil.js';
+import { el } from './documentUtil.js';
+
+window.addContact = function() {
+    const name = el('name').value;
+    const lastname = el('lastname').value;
+    const phone = el('phone').value;
+    const email = el('email').value;
+    const birthday = el('birthday').value;
+    const image = el('image').value;
+
+    // Validacion de datos si ha insertado nombre del contacto
+    if ( name === '' ) {
+        notifyError('El nombre de un campo obligatorio');
+        return;
+    }
+
+    // Implementacion operacion para registrar un contacto y subir una imagen
+    const formData = new FormData();
+    formData.append('name', name);
+    formData.append('lastname', lastname);
+    formData.append('phone', phone);
+    formData.append('email', email);
+    formData.append('birthday', birthday);
+    if ( image ) {
+        formData.append('image', image);
+    }
+    axios.post('http://localhost:8080/contacts', formData)
+        .then((response) => {
+            notifyOk('Los datos se han registrado correctamente');
+            el('name').value = '';
+            el('lastname').value = '';
+            el('phone').value = '';
+            el('email').value = '';
+            el('birthday').value = '';
+        })
+        .catch((error) => {
+            notifyError('Se ha producido un error al enviar los datos')
+        })
+}
