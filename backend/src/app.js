@@ -31,7 +31,6 @@ app.get('/contacts/:contactId', async (req, res) => {
 // Operacion PUT para actualizar un contacto por su ID
 app.put('/contacts/:contactId', async (req, res) =>{
     await db('contacts').where({id: req.params.contactId}).update({
-        id: req.body.id,
         name: req.body.name,
         lastname: req.body.lastname,
         phone: req.body.phone,
