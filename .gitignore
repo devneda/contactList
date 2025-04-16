@@ -130,7 +130,7 @@ dist
 .pnp.*
 
 # Archivos como imagenes
-./backend/images
+*.png
 
 # Databases
 *.db
