@@ -133,4 +133,4 @@ dist
 ./backend/images
 
 # Databases
-./backend/database
+*.db
