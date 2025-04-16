@@ -58,21 +58,21 @@ npm start
 ```bash
 contactList/
 │
-├── database/          # Archivos relacionados con SQLite3
+├── backend/                 # Backend con Node.js, Express y SQLite3
+│   ├── database/            # Base de datos SQLite
+│   ├── images/              # Imágenes del proyecto (fotos de contactos)
+│   └── src/
+│       └── app.js           # Archivo principal del backend
+│   └── package.json         # Dependencias y configuración del backend
 │
-├── images/            # Imágenes utilizadas en la app (por ejemplo, fotos de contacto)
+├── frontend/                # Frontend de la aplicación
+│   ├── scripts/             # Scripts JS del cliente
+│   │   └── index.js
+│   ├── src/                 # HTML u otros recursos
+│   │   └── index.html
+│   └── package.json         # Dependencias y configuración del frontend
 │
-├── src/               # Carpeta principal del proyecto
-│   ├── app.js         # Archivo principal del backend (Express)
-│   │
-│   ├── frontend/      # Frontend de la aplicación
-│   │   ├── scripts/   # Scripts JS del lado del cliente
-│   │   │   └── index.js
-│   │   │
-│   │   └── src/       # HTML u otros recursos del frontend
-│   │       └── index.html
-│
-├── package.json       # Configuración y dependencias del backend
-└── README.md
+├── .gitignore               # Archivos/Carpetas ignoradas por Git
+└── README.md                # Documentación del proyecto
 ```
 
