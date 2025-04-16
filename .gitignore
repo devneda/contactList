@@ -131,3 +131,6 @@ dist
 
 # Archivos como imagenes
 ./backend/images
+
+# Databases
+./backend/database
