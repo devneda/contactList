@@ -1,4 +1,4 @@
-# 📇 Contact Manager Web App
+# 📇 Web App de Contactos
 
 Este proyecto es una aplicación web con un CRUD completo para gestionar una lista de contactos. Está desarrollada con **Node.js**, **Express** y utiliza **SQLite3** como base de datos ligera. El frontend y el backend están organizados en carpetas separadas dentro del mismo repositorio.
 
@@ -7,7 +7,7 @@ Este proyecto es una aplicación web con un CRUD completo para gestionar una lis
 ## 🚀 Características
 
 - ✏️ Crear, leer, actualizar y eliminar contactos
-- 🔍 Buscar contactos fácilmente
+- 👁️ Visualizar contactos fácilmente
 - 🌐 Interfaz web amigable
 - 💾 Persistencia de datos con SQLite3
 
@@ -53,26 +53,36 @@ cd backend
 npm start
 ```
 - Puedes aplicar lo mismo para inciar el frontend pero accediendo a su propia carpeta.
+- **IMPORTANTE:** La carpeta **.\backend\images** puede que no esté creada cuando hagas un clone del repositorio, en ese caso, crea la carpeta para poder añadir **Imagenes**.
 
 ## 📁 Estructura del proyecto
 ```bash
 contactList/
 │
-├── backend/                 # Backend con Node.js, Express y SQLite3
-│   ├── database/            # Base de datos SQLite
-│   ├── images/              # Imágenes del proyecto (fotos de contactos)
+├── backend/                          # Backend con Node.js, Express y SQLite3
+│   ├── database/                     # Base de datos SQLite
+│   ├── images/                       # Carpeta donde se guardan las imágenes subidas
 │   └── src/
-│       └── app.js           # Archivo principal del backend
-│   └── package.json         # Dependencias y configuración del backend
+│       └── app.js                    # Archivo principal del backend
+│   └── package.json                  # Configuración y dependencias del backend
 │
-├── frontend/                # Frontend de la aplicación
-│   ├── scripts/             # Scripts JS del cliente
-│   │   └── index.js
-│   ├── src/                 # HTML u otros recursos
-│   │   └── index.html
-│   └── package.json         # Dependencias y configuración del frontend
+├── frontend/                         # Frontend de la aplicación
+│   ├── scripts/                      # Scripts JS del cliente
+│   │   ├── contacto.js
+│   │   ├── dialogUtils.js
+│   │   ├── documentUtils.js
+│   │   ├── modify.js
+│   │   └── registro.js
+│   │
+│   ├── src/                          # Páginas HTML de la app
+│   │   ├── contacto.html
+│   │   ├── modify.html
+│   │   └── registro.html
+│   │
+│   └── package.json                  # Configuración y dependencias del frontend (si aplica)
 │
-├── .gitignore               # Archivos/Carpetas ignoradas por Git
-└── README.md                # Documentación del proyecto
+├── .gitignore                        # Archivos ignorados por Git
+└── README.md                         # Documentación del proyecto
+
 ```
 
