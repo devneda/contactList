@@ -84,11 +84,11 @@ app.post('/contacts', upload.single('image'), async (req, res) => {
             return res.status(400).json({message: 'Faltan campos obligatorios'});
         }
 
-        if (!req.file) {
+        /* if (!req.file) {
             return res.status(400).json({message: 'No se ha proporcionado ninguna imagen'});
-        }
+        } */
 
-        const filename = req.file.filename;
+        //const filename = req.file.filename;
 
         if (!fs.existsSync(IMAGES_PATH)) {
             fs.mkdirSync(IMAGES_PATH);

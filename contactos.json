@@ -1,0 +1,113 @@
+{
+  "v": 6,
+  "name": "contactos",
+  "folders": [],
+  "requests": [
+    {
+      "v": "11",
+      "name": "/contacts",
+      "method": "GET",
+      "endpoint": "https://echo.hoppscotch.io",
+      "params": [],
+      "headers": [],
+      "preRequestScript": "",
+      "testScript": "",
+      "auth": {
+        "authType": "inherit",
+        "authActive": true
+      },
+      "body": {
+        "contentType": null,
+        "body": null
+      },
+      "requestVariables": [],
+      "responses": {}
+    },
+    {
+      "v": "11",
+      "name": "/contacts/:contactId",
+      "method": "GET",
+      "endpoint": "http://localhost:8080/contacts/2",
+      "params": [],
+      "headers": [],
+      "preRequestScript": "",
+      "testScript": "",
+      "auth": {
+        "authType": "inherit",
+        "authActive": true
+      },
+      "body": {
+        "contentType": null,
+        "body": null
+      },
+      "requestVariables": [],
+      "responses": {}
+    },
+    {
+      "v": "11",
+      "name": "/contacts/:contactId",
+      "method": "PUT",
+      "endpoint": "http://localhost:8080/contacts/4",
+      "params": [],
+      "headers": [],
+      "preRequestScript": "",
+      "testScript": "",
+      "auth": {
+        "authType": "inherit",
+        "authActive": true
+      },
+      "body": {
+        "contentType": "application/json",
+        "body": "{\n  \"name\": \"Prueba\",\n  \"lastname\": \"Contacto\",\n  \"phone\": \"748673487\",\n  \"email\": \"kenny.pineda@hotmail.es\",\n  \"birthday\": \"09/09/1991\"\n}"
+      },
+      "requestVariables": [],
+      "responses": {}
+    },
+    {
+      "v": "11",
+      "name": "/contacts",
+      "method": "POST",
+      "endpoint": "http://localhost:8080/contacts",
+      "params": [],
+      "headers": [],
+      "preRequestScript": "",
+      "testScript": "",
+      "auth": {
+        "authType": "inherit",
+        "authActive": true
+      },
+      "body": {
+        "contentType": "application/json",
+        "body": "{\n  \"name\": \"Prueba4\",\n  \"lastname\": \"Contacto\",\n  \"phone\": \"87858785\",\n  \"email\": \"contacto@example.com\",\n  \"birthday\": \"09/09/1991\"\n}"
+      },
+      "requestVariables": [],
+      "responses": {}
+    },
+    {
+      "v": "11",
+      "name": "/contacts/:contactId",
+      "method": "DELETE",
+      "endpoint": "http://localhost:8080/contacts/3",
+      "params": [],
+      "headers": [],
+      "preRequestScript": "",
+      "testScript": "",
+      "auth": {
+        "authType": "inherit",
+        "authActive": true
+      },
+      "body": {
+        "contentType": null,
+        "body": null
+      },
+      "requestVariables": [],
+      "responses": {}
+    }
+  ],
+  "auth": {
+    "authType": "none",
+    "authActive": true
+  },
+  "headers": [],
+  "_ref_id": "coll_m9jr1904_a8d26a36-3ba3-4aba-8092-b86a421ad0b2"
+}
