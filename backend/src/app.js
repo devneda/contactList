@@ -45,15 +45,28 @@ app.get('/contacts/:contactId', async (req, res) => {
 
 // Operacion PUT para actualizar un contacto por su ID
 app.put('/contacts/:contactId', async (req, res) =>{
-    await db('contacts').where({id: req.params.contactId}).update({
-        name: req.body.name,
-        lastname: req.body.lastname,
-        phone: req.body.phone,
-        email: req.body.email,
-        birthday: req.body.birthday,
-        favorite: req.body.favorite
-    });
-    res.status(201).json({});
+    const id = req.params.contactId;
+    console.log('Datos recibidos:', req.body);
+    const { name, lastname, phone, email, birthday } = req.body;
+
+    if (!name && !lastname && !phone && !email && !birthday) {
+        return res.status(400).json({ message: 'Datos vacíos'})
+    }
+
+    try {
+        await db('contacts').where({id}).update({
+            name,
+            lastname,
+            phone,
+            email,
+            birthday
+        });
+
+        res.status(201).json({});
+    } catch (err) {
+        console.error('Error al actualizar: ', err);
+        res.status(500).json({message: 'Error interno al actualizar'});
+    }
 });
 
 // Operacion DEL para eliminar un cntacto por su ID
