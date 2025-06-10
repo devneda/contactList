@@ -39,8 +39,17 @@ app.get('/contacts', async (req, res) => {
 
 // Operacion GET para obtener un contacto por su ID
 app.get('/contacts/:contactId', async (req, res) => {
-    const contact = await db('contacts').select('*').where({id: req.params.contactId}).first();
-    res.status(200).json(contact);
+    const result = await db('contacts').select('*').where({id: req.params.contactId}).first();
+
+    if(result === undefined) {
+        res.status(404).json({
+            status: 'not-found',
+            message: 'Contact not found'
+        });
+        return;
+    }
+
+    res.status(200).json(result);
 });
 
 // Operacion PUT para actualizar un contacto por su ID
@@ -77,11 +86,11 @@ app.delete('/contacts/:contactId', async (req, res) => {
 });
 
 // Operacion para registrar un contacto y guardar una imagen por POST
-app.post('/contacts', upload.single('image'), async (req, res) => {
+app.post('/contacts', async (req, res) => {
     try {
         const { name, lastname, phone, email, birthday } = req.body;
         if ( !name || !lastname || !phone || !email || !birthday ) {
-            return res.status(400).json({message: 'Faltan campos obligatorios'});
+            return res.status(400).json({status: 'bad-request', message: 'Faltan campos obligatorios'});
         }
 
         /* if (!req.file) {
@@ -94,14 +103,25 @@ app.post('/contacts', upload.single('image'), async (req, res) => {
             fs.mkdirSync(IMAGES_PATH);
         }
 
+        const contact = {
+            name: req.body.name,
+            lastname: req.body.lastname,
+            phone: req.body.phone,
+            email: req.body.email,
+            birthday: req.body.birthday
+        };
+        
         await db('contacts').insert({
             name: req.body.name,
             lastname: req.body.lastname,
             phone: req.body.phone,
             email: req.body.email,
-            birthday: req.body.birthday,
+            birthday: req.body.birthday
         });
-        res.status(201).json({});
+        res.status(201).json({
+            // TODO devolver el contacto registrado
+            contact
+        });
     } catch (error) {
         console.error('Error al guardar el contacto: ' + error);
         res.status(500).json({message: 'Error interno del servidor'});
@@ -111,3 +131,5 @@ app.post('/contacts', upload.single('image'), async (req, res) => {
 app.listen(port, () => {
     console.log('El backend ha iniciado en el puerto ' + port + '.')
 });
+
+module.exports = { app }; 
