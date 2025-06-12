@@ -37,6 +37,13 @@ app.get('/contacts', async (req, res) => {
     res.status(200).json(contacts);
 });
 
+// id: contacts.id,
+// name: contacts.name,
+// lastname: contacts.lastname,
+// phone: contacts.phone, 
+// email: contacts.email,
+// birthday: contacts.birthday
+
 // Operacion GET para obtener un contacto por su ID
 app.get('/contacts/:contactId', async (req, res) => {
     const result = await db('contacts').select('*').where({id: req.params.contactId}).first();
@@ -70,7 +77,6 @@ app.put('/contacts/:contactId', async (req, res) =>{
             email,
             birthday
         });
-
         res.status(201).json({});
     } catch (err) {
         console.error('Error al actualizar: ', err);
@@ -92,6 +98,9 @@ app.post('/contacts', async (req, res) => {
         if ( !name || !lastname || !phone || !email || !birthday ) {
             return res.status(400).json({status: 'bad-request', message: 'Faltan campos obligatorios'});
         }
+        if (!/^\d+$/.test(phone)) {
+            return res.status(400).json({ status: 'bad-request', message: 'El campo phone debe contener solo números' });
+        }
 
         /* if (!req.file) {
             return res.status(400).json({message: 'No se ha proporcionado ninguna imagen'});
@@ -103,28 +112,24 @@ app.post('/contacts', async (req, res) => {
             fs.mkdirSync(IMAGES_PATH);
         }
 
-        const contact = {
+        const returning = await db('contacts').insert({
             name: req.body.name,
             lastname: req.body.lastname,
             phone: req.body.phone,
             email: req.body.email,
             birthday: req.body.birthday
-        };
-        
-        await db('contacts').insert({
-            name: req.body.name,
-            lastname: req.body.lastname,
-            phone: req.body.phone,
-            email: req.body.email,
-            birthday: req.body.birthday
-        });
+        }).returning('id');
         res.status(201).json({
-            // TODO devolver el contacto registrado
-            contact
+            id: returning[0].id,
+            name: req.body.name,
+            lastname: req.body.lastname,
+            phone: req.body.phone,
+            email: req.body.email,
+            birthday: req.body.birthday
         });
     } catch (error) {
         console.error('Error al guardar el contacto: ' + error);
-        res.status(500).json({message: 'Error interno del servidor'});
+        res.status(500).json({status: 'bad-request', message: 'UNIQUE constraint failed: contacts.name'});
     }
 });
 
