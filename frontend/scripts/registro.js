@@ -8,7 +8,7 @@ window.addContact = function() {
     const phone = el('phone').value;
     const email = el('email').value;
     const birthday = el('birthday').value;
-    const image = el('image').files[0];
+    //const image = el('image').files[0];
 
     // Validacion de datos si ha insertado nombre del contacto
     if ( name === '' ) {
@@ -16,17 +16,26 @@ window.addContact = function() {
         return;
     }
 
-    // Implementacion operacion para registrar un contacto y subir una imagen
-    const formData = new FormData();
-    formData.append('name', name);
-    formData.append('lastname', lastname);
-    formData.append('phone', phone);
-    formData.append('email', email);
-    formData.append('birthday', birthday);
-    if ( image ) {
-        formData.append('image', image);
+    //Implementacion operacion para registrar un contacto y subir una imagen
+    // const formData = new FormData();
+    // formData.append('name', name);
+    // formData.append('lastname', lastname);
+    // formData.append('phone', phone);
+    // formData.append('email', email);
+    // formData.append('birthday', birthday);
+    // if ( image ) {
+    //     formData.append('image', image);
+    // }
+    
+    const contact = {
+        'name':  name,
+        'lastname': lastname,
+        'phone': phone,
+        'email': email,
+        'birthday': birthday
     }
-    axios.post('http://localhost:8080/contacts', formData)
+
+    axios.post('http://localhost:8080/contacts', contact)
         .then((response) => {
             notifyOk('Los datos se han registrado correctamente');
             el('name').value = '';
