@@ -23,7 +23,7 @@ describe('contacts' , () => {
                     
                     // Se espera que los primeros datos de la respuesta sean estos 
                     expect(response.body[0].name).to.equal('Carlos');
-                    expect(response.body[1].name).to.equal('Ainho');
+                    expect(response.body[1].name).to.equal('Lucía');
                     done();
                 });
         });
@@ -34,11 +34,12 @@ describe('contacts' , () => {
             chai.request(app)
                 .post('/contacts')
                 .send({
-                    name: 'contactName',
-                    lastname: 'lastname',
-                    phone: '1234567',
+                    name: 'IntegrationName test',
+                    lastname: 'IntegrationLastname test',
+                    phone: '123456789',
                     email: 'example@example.dev',
-                    birthday: '1995-10-10'
+                    birthday: '1995-10-10',
+                    companyId: 1
                 })
                 .end((error, response) => {
                     response.should.have.status(201);
@@ -48,6 +49,7 @@ describe('contacts' , () => {
                     expect(response.body).to.have.property('phone');
                     expect(response.body).to.have.property('email');
                     expect(response.body).to.have.property('birthday');
+                    expect(response.body).to.have.property('companyId')
                     done();
                 });
         });
@@ -56,7 +58,7 @@ describe('contacts' , () => {
             chai.request(app)
                 .post('/contacts')
                 .send({
-                    lastname: 'lastname',
+                    lastname: 'IntegrationLastname test',
                     phone: '1234567',
                     email: 'example@example.dev',
                     birthday: '1995-10-10'
@@ -73,11 +75,12 @@ describe('contacts' , () => {
             chai.request(app)
                 .post('/contacts')
                 .send({
-                    name: 'contactName1',
-                    lastname: 'lastname',
-                    phone: '1234567L',
+                    name: 'IntegrationName test 2',
+                    lastname: 'IntegrationLastname test',
+                    phone: '12345678L',
                     email: 'example@example.dev',
-                    birthday: '1995-10-10'
+                    birthday: '1995-10-10',
+                    companyId: 1
                 })
                 .end((error, response) => {
                     response.should.have.status(400);

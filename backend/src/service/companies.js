@@ -2,9 +2,13 @@ const knex = require('knex');
 
 // Conexion con la BBDD
 const db = knex({
-    client: 'sqlite3',
+    client: 'mysql',
     connection: {
-        filename: './database/contacList.db'
+        host: 'localhost',
+        port: 3306,
+        user: 'user',
+        password: 'password',
+        database: 'contactsdb'
     },
     useNullAsDefault: true
 });
@@ -23,7 +27,7 @@ const findCompany = (async (id) => {
 const findCompanyByName = (async (name) => {
     const result = await db('company').select('*').where({companyName: name}).first();
 
-    return result;
+    return result;    
 });
 
 const registerCompany = (async (companyName, cif, address, city, phone, email) => {

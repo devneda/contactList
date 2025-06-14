@@ -2,9 +2,13 @@ const knex = require('knex');
 
 // Conexion con la BBDD
 const db = knex({
-    client: 'sqlite3',
+    client: 'mysql',
     connection: {
-        filename: './database/contacList.db'
+        host: 'localhost',
+        port: 3306,
+        user: 'user',
+        password: 'password',
+        database: 'contactsdb'
     },
     useNullAsDefault: true
 });
