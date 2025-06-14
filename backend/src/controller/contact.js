@@ -38,31 +38,32 @@ const getContactByName = (async (req, res) => {
 });
 
 const postContact = (async (req, res) => {
-    const { name, lastname, phone, email, birthday } = req.body;
-    if ( !name || !lastname || !phone || !email || !birthday ) {
+    const { name, lastname, phone, email, birthday, companyId} = req.body;
+    if ( !name || !lastname || !phone || !email || !birthday || !companyId ) {
             return res.status(400).json({status: 'bad-request', message: 'Faltan campos obligatorios'});
     }
     if (!/^\d+$/.test(phone)) {
         return res.status(400).json({ status: 'bad-request', message: 'El campo phone debe contener solo números' });
     }
-    const result = await registerContact(name, lastname, phone, email, birthday);
+    const result = await registerContact(name, lastname, phone, email, birthday, companyId);
     res.status(201).json({
             id: result.id,
             name: req.body.name,
             lastname: req.body.lastname,
             phone: req.body.phone,
             email: req.body.email,
-            birthday: req.body.birthday
+            birthday: req.body.birthday,
+            companyId: req.body.companyId
         });
 });
 
 const putContact = (async (req, res) => {
-    const { name, lastname, phone, email, birthday } = req.body;
+    const { name, lastname, phone, email, birthday, companyId } = req.body;
     const id = req.params.id;
-    if (!name && !lastname && !phone && !email && !birthday) {
+    if (!name && !lastname && !phone && !email && !birthday && !companyId) {
         return res.status(400).json({ message: 'Datos vacíos'})
     }
-    await modifyContact(id, name, lastname, phone, email, birthday);
+    await modifyContact(id, name, lastname, phone, email, birthday, companyId);
     res.status(204).json({});
 });
 

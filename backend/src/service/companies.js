@@ -10,28 +10,30 @@ const db = knex({
 });
 
 const findCompanies = (async () => {
-    const result = await db('companies').select('*');
+    const result = await db('company').select('*');
 
     return result;
 });
 
 const findCompany = (async (id) => {
-    const result = await db('companies').select('*').where({id: id}).first();
+    const result = await db('company').select('*').where({id: id}).first();
 
     return result;
 });
 const findCompanyByName = (async (name) => {
-    const result = await db('companies').select('*').where({companyName: name}).first();
+    const result = await db('company').select('*').where({companyName: name}).first();
 
     return result;
 });
 
-const registerCompany = (async (name, address, phone, email) => {
+const registerCompany = (async (companyName, cif, address, city, phone, email) => {
     let companyId;
 
-    const returning = await db('companies').insert({
-            name: name,
+    const returning = await db('company').insert({
+            companyName: companyName,
+            cif: cif,
             address: address,
+            city: city,
             phone: phone,
             email: email
         }).then(async (ids) => {
@@ -40,18 +42,22 @@ const registerCompany = (async (name, address, phone, email) => {
 
     const result = {
         id: companyId, 
-        name: name,
+        companyName: companyName,
+        cif: cif,
         address: address,
+        city: city,
         phone: phone, 
         email: email
     }
     return result;
 });
 
-const modifyCompany = (async (id, name, address, phone, email) => {
-    const result = await db('companies').where({id: id}).update({
-        name: name,
+const modifyCompany = (async (id, companyName, cif, address, city, phone, email) => {
+    const result = await db('company').where({id: id}).update({
+        companyName: companyName,
+        cif: cif,
         address: address,
+        city: city,
         phone: phone,
         email: email
     });
@@ -60,7 +66,7 @@ const modifyCompany = (async (id, name, address, phone, email) => {
 });
 
 const removeCompany = (async (id) => {
-    const result = await db('companies').where({id: id}).del();
+    const result = await db('company').where({id: id}).del();
     return result;
 });
 

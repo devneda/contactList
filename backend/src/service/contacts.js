@@ -33,7 +33,7 @@ const contactExists = (async (name) => {
     return result;
 })
 
-const registerContact = (async (name, lastname, phone, email, birthday) => {
+const registerContact = (async (name, lastname, phone, email, birthday, companyId) => {
     let contactId;
 
     const returning = await db('contacts').insert({
@@ -41,7 +41,8 @@ const registerContact = (async (name, lastname, phone, email, birthday) => {
             lastname: lastname,
             phone: phone,
             email: email,
-            birthday: birthday
+            birthday: birthday,
+            companyId: companyId
         }).then(async (ids) => {
             contactId = ids[0];
         });
@@ -52,18 +53,20 @@ const registerContact = (async (name, lastname, phone, email, birthday) => {
             lastname: lastname,
             phone: phone, 
             email: email,
-            birthday: birthday
+            birthday: birthday,
+            companyId: companyId
         }
         return result;
 });
 
-const modifyContact = (async (id, name, lastname, phone, email, birthday) => {
+const modifyContact = (async (id, name, lastname, phone, email, birthday, companyId) => {
     await db('contacts').where({id}).update({
             name: name,
             lastname: lastname,
             phone: phone,
             email: email,
-            birthday: birthday
+            birthday: birthday,
+            companyId: companyId
         });
 });
 
