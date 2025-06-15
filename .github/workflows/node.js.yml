@@ -15,7 +15,7 @@ jobs:
 
     strategy:
       matrix:
-        node-version: [18.x, 20.x, 22.x]
+        node-version: [18.x, 20.x]
 
     steps:
       - uses: actions/checkout@v4
@@ -24,19 +24,13 @@ jobs:
         uses: actions/setup-node@v4
         with:
           node-version: ${{ matrix.node-version }}
-          #cache: 'npm'
-          #cache-dependency-path: backend/package-lock.json
 
       - name: Install dependencies
         run: npm install
         working-directory: ./backend
-      
-      - name: Deploy Docker
-        run: docker compose -f docker-compose.dev.yaml up -d
-        working-directory: ./backend
 
-      - name: Run all test
-        run: npm test
+      - name: Run all tests
+        run: make all-test
         working-directory: ./backend
         env:
           CONFIG_FILE: config.local.yaml

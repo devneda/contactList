@@ -1,5 +1,6 @@
-version: "3.4"
+version: "3.9"
 name: contacts
+
 services:
   db:
     image: mariadb:11.3.2
@@ -13,3 +14,8 @@ services:
       - "3306:3306"
     volumes:
       - ./db:/docker-entrypoint-initdb.d
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "-uuser", "-ppassword"]
+      interval: 5s
+      timeout: 3s
+      retries: 6

@@ -21,6 +21,10 @@ describe('contacts' , () => {
                     expect(response.body[0]).to.have.property('id');
                     expect(response.body[0]).to.have.property('name');
                     expect(response.body[0]).to.have.property('lastname');
+                    expect(response.body[0]).to.have.property('phone');
+                    expect(response.body[0]).to.have.property('email');
+                    expect(response.body[0]).to.have.property('birthday');
+                    expect(response.body[0]).to.have.property('companyId');
                     
                     // Se espera que los primeros datos de la respuesta sean estos 
                     expect(response.body[0].name).to.equal('Carlos');
