@@ -2,6 +2,7 @@ const chai = require('chai');
 const chaiHttp = require('chai-http');
 const expect = require('chai').expect;
 //const chaiHttp = require('chai-http');
+process.argv.push('--config', 'config.local.yaml');
 
 const app = require('../../app').app;
 
