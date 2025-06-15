@@ -30,7 +30,11 @@ jobs:
       - name: Install dependencies
         run: npm install
         working-directory: ./backend
+      
+      - name: Deploy Docker
+        run: docker compose -f docker-compose.dev.yaml up -d
+        working-directory: ./backend
 
-      - name: Run unit tests
-        run: npm run unit-test
+      - name: Run all test
+        run: npm test
         working-directory: ./backend
