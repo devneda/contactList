@@ -7,7 +7,6 @@ services:
     environment:
       MYSQL_USER: 'user'
       MYSQL_PASSWORD: 'password'
-      MYSQL_DB: 'contactsdb'
       MYSQL_PORT: 3306
       MYSQL_ROOT_PASSWORD: 'rootpassword'
     volumes:
