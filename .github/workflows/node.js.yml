@@ -38,3 +38,5 @@ jobs:
       - name: Run all test
         run: npm test
         working-directory: ./backend
+        env:
+          CONFIG_FILE: config.local.yaml
