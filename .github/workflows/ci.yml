@@ -1,0 +1,42 @@
+name: Contacts CI
+
+on:
+  push:
+    branches: [ "main" ]
+  pull_request:
+    branches: [ "main" ]
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20.x
+          cache: 'npm'
+          cache-dependency-path: backend/package-lock.json
+
+      - name: Build and start Docker Compose
+        run: docker compose -f backend/docker-compose.dev.yaml up -d --build
+
+      - name: Wait for MariaDB to be ready
+        run: |
+          echo "Esperando a que MariaDB esté lista..."
+          for i in {1..30}; do
+            docker exec contacts-db-dev mysql -uuser -ppassword -e "SELECT 1" > /dev/null 2>&1 && break
+            echo "MariaDB aún no responde, reintentando..."
+            sleep 2
+          done
+
+      - name: Install backend dependencies
+        run: npm install
+        working-directory: backend
+
+      - name: Run tests
+        run: npm test
+        working-directory: backend
