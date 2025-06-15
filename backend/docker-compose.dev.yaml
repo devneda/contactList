@@ -3,11 +3,13 @@ name: contacts
 
 services:
   db:
-    image: mariadb:11.3.2
+    build:
+      context: ./db
     container_name: contacts-db-dev
     environment:
       MYSQL_USER: 'user'
       MYSQL_PASSWORD: 'password'
+      MYSQL_DB: contactsdb
       MYSQL_PORT: 3306
       MYSQL_ROOT_PASSWORD: 'rootpassword'
     ports:
