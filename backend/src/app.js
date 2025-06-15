@@ -1,7 +1,7 @@
 const express = require('express');
 const cors = require('cors');
+const { config } = require('./config/configuration');
 
-const port = 8080;
 
 const contacts = require('./route/contacts');
 const companies = require('./route/companies');
@@ -14,8 +14,8 @@ app.use(cors());
 app.use('/', contacts);
 app.use('/', companies);
 
-app.listen(port, () => {
-    console.log('El backend ha iniciado en el puerto ' + port + '.')
+app.listen(config.service.port, () => {
+    console.log('El backend ha iniciado en el puerto ' + config.service.port + '.')
 });
 
 module.exports = { app }; 

@@ -2,23 +2,35 @@ version: "3.4"
 name: contacts
 services:
   db:
-  image: mariadb:11.3.2
-  container_name: contacts-db-dev
-  environment:
-    MYSQL_USER: 'user'
-    MYSQL_PASSWORD: 'password'
-    MYSQL_DB: 'contactsdb'
-    MYSQL_PORT: 3306
-    MYSQL_ROOT_PASSWORD: 'rootpassword'
-  ports:
-    - "3306:3306"
-  volumes:
-    - ./db:/docker-entrypoint-initdb.d
-    
+    image: mariadb:11.3.2
+    container_name: contacts-db-dev
+    environment:
+      MYSQL_USER: 'user'
+      MYSQL_PASSWORD: 'password'
+      MYSQL_DB: 'contactsdb'
+      MYSQL_PORT: 3306
+      MYSQL_ROOT_PASSWORD: 'rootpassword'
+    volumes:
+      - ./db:/docker-entrypoint-initdb.d
+    healthcheck:
+      test: [CMD, healthcheck.sh, --conect, --innodb_initialized]
+      interval: 10s
+      timeout: 5s
+      retries: 3
+    networks:
+      - networks1
   backend:
     image: contacts
     container_name: contacts-api
-    ports: 
+    ports:
       - "8080:8080"
+    depends_on:
+      - db:
+        condition: service_healthy
+    networks:
+      - networks1
+networks:
+  network1:
+    driver: bridge
 
 

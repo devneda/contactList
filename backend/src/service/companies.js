@@ -1,14 +1,15 @@
 const knex = require('knex');
+const { config } = require('../config/configuration');
 
 // Conexion con la BBDD
 const db = knex({
     client: 'mysql',
     connection: {
-        host: 'localhost',
-        port: 3306,
-        user: 'user',
-        password: 'password',
-        database: 'contactsdb'
+        host: config.db.host,
+        port: config.db.port,
+        user: config.db.user,
+        password: config.db.password,
+        database: config.db.database
     },
     useNullAsDefault: true
 });
