@@ -3,10 +3,10 @@ const { getCompanies, getCompanyById, getCompanyByName, postCompany, putCompany,
 const router = express.Router();
 
 router.get('/companies', getCompanies);
-router.get('/companies/:companyId', getCompanyById);
-router.get('/companies', getCompanyByName)
+router.get('/companies/:id', getCompanyById);
+router.get('/companies/search/:companyName', getCompanyByName)
 router.post('/companies', postCompany);
-router.put('/companies/:companyId', putCompany);
-router.delete('/companies/:companyId', deleteCompany);
+router.put('/companies/:id', putCompany);
+router.delete('/companies/:id', deleteCompany);
 
 module.exports = router;
