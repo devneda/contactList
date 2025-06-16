@@ -2,11 +2,17 @@ import axios from 'axios';
 import { el } from './documentUtils';
 import { notifyOk } from './dialogUtils';
 
+const baseURL =
+    window.location.hostname === 'localhost'
+        ? 'http://localhost:8080/api'
+        : '/api';
+
 window.readContacts = function() {
-    axios.get('http://localhost:8080/contacts')
+    axios.get(`${baseURL}/contacts`)
     .then((response) => {
         const contactList = response.data;
         const contactTable = el('tableBody');
+        console.log('Response:', response.data);
         contactList.forEach(contact => {
             const row = document.createElement('tr');
             row.id = 'contact-' + contact.id;
@@ -38,7 +44,7 @@ window.readContacts = function() {
 
 window.removeContact = function(id) {
     if (confirm('¿Está seguro que desea eliminar este CONTACTO?')) {
-        axios.delete('http://localhost:8080/contacts/' + id)
+        axios.delete(`${baseURL}/contacts/` + id)
         .then((response) => {
             if (response.status == 204) {
                 notifyOk('Contacto eliminado correctamente');

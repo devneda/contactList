@@ -1,6 +1,10 @@
 import axios from 'axios';
 import { notifyError, notifyOk} from '../scripts/dialogUtils.js';
 import { el } from '../scripts/documentUtils.js';
+const baseURL =
+    window.location.hostname === 'localhost'
+        ? 'http://localhost:8080/api'
+        : '/api';
 
 window.addContact = function() {
     const name = el('name').value;
@@ -25,7 +29,7 @@ window.addContact = function() {
         'companyId': companyId
     }
 
-    axios.post('http://localhost:8080/contacts', contact)
+    axios.post(`${baseURL}/contacts`, contact)
         .then((response) => {
             notifyOk('Los datos se han registrado correctamente');
             el('name').value = '';
@@ -62,7 +66,7 @@ window.addCompany = function() {
         'email': email
     }
 
-    axios.post('http://localhost:8080/companies', company)
+    axios.post(`${baseURL}/companies`, company)
         .then((response) => {
             notifyOk('Los datos se han registrado correctamente');
             el('companyName').value = '';

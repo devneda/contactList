@@ -1,9 +1,13 @@
 import axios from 'axios';
 import { el } from './documentUtils';
 import { notifyOk } from './dialogUtils';
+const baseURL =
+    window.location.hostname === 'localhost'
+        ? 'http://localhost:8080/api'
+        : '/api';
 
 window.readCompanies = function() {
-    axios.get('http://localhost:8080/companies')
+    axios.get(`${baseURL}/companies`)
     .then((response) => {
         const companyList = response.data;
         const companyTable = el('tableBody');
@@ -39,7 +43,7 @@ window.readCompanies = function() {
 
 window.removeCompany = function(id) {
     if (confirm('¿Está seguro que desea eliminar esta EMPRESA?')) {
-        axios.delete('http://localhost:8080/companies/' + id)
+        axios.delete(`${baseURL}/companies/` + id)
         .then((response) => {
             if (response.status == 204) {
                 notifyOk('Empresa eliminada correctamente');
