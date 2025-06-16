@@ -8,6 +8,7 @@ window.addContact = function() {
     const phone = el('phone').value;
     const email = el('email').value;
     const birthday = el('birthday').value;
+    let compamyId = 1;
     //const image = el('image').files[0];
 
     // Validacion de datos si ha insertado nombre del contacto
@@ -32,7 +33,8 @@ window.addContact = function() {
         'lastname': lastname,
         'phone': phone,
         'email': email,
-        'birthday': birthday
+        'birthday': birthday,
+        'companyId': companyId
     }
 
     axios.post('http://localhost:8080/contacts', contact)
@@ -43,6 +45,7 @@ window.addContact = function() {
             el('phone').value = '';
             el('email').value = '';
             el('birthday').value = '';
+            el('companyId').value = '';
         })
         .catch((error) => {
             notifyError('Se ha producido un error al enviar los datos')

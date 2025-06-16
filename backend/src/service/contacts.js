@@ -3,20 +3,20 @@ const { config } = require('../config/configuration');
 
 // Conexion con la BBDD
 const db = knex({
-    client: 'mysql',
+    client: 'mysql2',
     connection: {
         host: config.db.host,
         port: config.db.port,
         user: config.db.user,
         password: config.db.password,
-        database: config.db.database
+        database: config.db.database,
+        dateStrings: true, // EVITA la conversión automática a objeto Date
     },
     useNullAsDefault: true
 });
 
 const findContacts = (async () => {
     const result = await db('contacts').select('*');
-
     return result;
 });
 

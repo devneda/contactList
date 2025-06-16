@@ -22,20 +22,20 @@ const getContactById = (async (req, res) => {
     res.status(200).json(contact);
 });
 
-const getContactByName = (async (req, res) => {
+const getContactByName = async (req, res) => {
     const contact = await findContactByName(req.params.name);
 
-    if(contact === undefined) {
+    if (!contact) {
         res.status(404).json({
             status: 'not-found',
             message: 'Contact not found'
         });
-
         return;
     }
-
+    
     res.status(200).json(contact);
-});
+};
+
 
 const postContact = (async (req, res) => {
     const { name, lastname, phone, email, birthday, companyId} = req.body;
