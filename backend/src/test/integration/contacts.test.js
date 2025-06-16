@@ -11,10 +11,10 @@ chai.should();
 
 describe('contacts', () => {
     
-    describe('GET /contacts', () => {
+    describe('GET /api/contacts', () => {
         it('should get all contacts', (done) => {
             chai.request(app)
-                .get('/contacts')
+                .get('/api/contacts')
                 .end((error, response) => {
                     response.should.have.status(200);
                     response.body.should.be.a('array');
@@ -34,10 +34,10 @@ describe('contacts', () => {
         });
     });
 
-    describe('POST /contacts', () => {
+    describe('POST /api/contacts', () => {
         it('should register a new contact', (done) => {
             chai.request(app)
-                .post('/contacts')
+                .post('/api/contacts')
                 .send({
                     name: 'IntegrationName test',
                     lastname: 'IntegrationLastname test',
@@ -61,7 +61,7 @@ describe('contacts', () => {
 
         it('validation should fail because name is mandatory', (done) => {
             chai.request(app)
-                .post('/contacts')
+                .post('/api/contacts')
                 .send({
                     lastname: 'IntegrationLastname test',
                     phone: '1234567',
@@ -78,7 +78,7 @@ describe('contacts', () => {
 
         it('validation should fail because phone must be a number', (done) => {
             chai.request(app)
-                .post('/contacts')
+                .post('/api/contacts')
                 .send({
                     name: 'IntegrationName test 2',
                     lastname: 'IntegrationLastname test',
@@ -96,10 +96,10 @@ describe('contacts', () => {
         });
     });
 
-    describe('PUT /contacts', () => {
+    describe('PUT /api/contacts', () => {
         it('should update a contact', (done) => {
             chai.request(app)
-                .put('/contacts/3')
+                .put('/api/contacts/3')
                 .send({
                     name: 'Miguel',
                     lastname: 'Pérez',
@@ -115,7 +115,7 @@ describe('contacts', () => {
         });
         it('should fail to update a contact with empty data', (done) => {
             chai.request(app)
-                .put('/contacts/3')
+                .put('/api/contacts/3')
                 .send({})
                 .end((error, response) => {
                     response.should.have.status(400);
@@ -124,10 +124,10 @@ describe('contacts', () => {
                 });
         });
     });
-    describe('DELETE /contacts', () => {
+    describe('DELETE /api/contacts', () => {
         it('should delete a contact', (done) => {
             chai.request(app)
-                .delete('/contacts/3')
+                .delete('/api/contacts/3')
                 .end((error, response) => {
                     response.should.have.status(204);
                     done();
@@ -136,7 +136,7 @@ describe('contacts', () => {
 
         it('should fail to delete a contact that does not exist', (done) => {
             chai.request(app)
-                .delete('/contacts/L1')
+                .delete('/api/contacts/L1')
                 .end((error, response) => {
                     response.should.have.status(400);
                     expect(response.body.status).to.equal('bad-request');
