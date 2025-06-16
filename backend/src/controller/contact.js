@@ -69,7 +69,22 @@ const putContact = (async (req, res) => {
 
 const deleteContact = (async (req, res) => {
     //TODO Validaciones y comprobaciones
-    await removeContact(req.params.id);
+    const contactId= parseInt(req.params.id);
+
+    if (!Number.isInteger(contactId) || contactId <= 0) {
+        return res.status(400).json({
+            status: 'bad-request',
+            message: 'El id del contacto debe ser un número entero positivo'
+        });
+    }
+
+    const removed = await removeContact(contactId);
+    if (!removed) {
+        return res.status(404).json({
+            status: 'not-found',
+            message: 'Contact not found'
+        });
+    }
 
     res.status(204).json({});
 });

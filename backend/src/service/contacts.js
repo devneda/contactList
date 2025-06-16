@@ -76,7 +76,7 @@ const modifyContact = (async (id, name, lastname, phone, email, birthday, compan
 });
 
 const removeContact = (async (id) => {
-    await db('contacts').del().where({id: id});
+    return await db('contacts').del().where({id: id});
 });
 
 module.exports = {
