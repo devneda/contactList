@@ -7,7 +7,7 @@ const getCompanies = (async (req, res) => {
 });
 
 const getCompanyById = (async (req, res) => {
-    const id = req.params.companyId;
+    const id = req.params.id;
     const company = await findCompany(id);
 
     if (company === undefined) {
@@ -50,7 +50,7 @@ const postCompany = (async (req, res) => {
 
 const putCompany = (async (req, res) => {
     const { companyName, cif, address, city, phone, email } = req.body;
-    const id = req.params.companyId;
+    const id = req.params.id;
     if (!companyName && !cif && !address && !city && !phone && !email) {
         return res.status(400).json({ message: 'Datos vacíos' });
     }
@@ -61,6 +61,7 @@ const putCompany = (async (req, res) => {
 const deleteCompany = (async (req, res) => {
     //TODO Validaciones y comprobaciones
     const companyId = parseInt(req.params.id);
+    
     if (!Number.isInteger(companyId) || companyId <= 0) {
         return res.status(400).json({ status: 'bad-request', message: 'El ID de la empresa debe ser un número entero' });
     }
@@ -75,7 +76,6 @@ const deleteCompany = (async (req, res) => {
 
     res.status(204).json({});
 });
-
 
 module.exports = {
     getCompanies,

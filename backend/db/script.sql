@@ -22,6 +22,7 @@ CREATE TABLE `contacts` (
     `favorite` INT DEFAULT 0,
     `companyId` INT NOT NULL,
     CONSTRAINT `FK_COMPANYID` FOREIGN KEY (`companyId`) REFERENCES `company` (`id`)
+    ON DELETE CASCADE
 );
 
 INSERT INTO `company` (`companyName`, `cif`, `address`, `city`, `phone`, `email`) VALUES
