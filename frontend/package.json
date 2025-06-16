@@ -5,7 +5,10 @@
         "src/index.html",
         "src/modify.html",
         "src/registro.html",
-        "src/contacto.html"
+        "src/contacto.html",
+        "src/empresa.html",
+        "src/companyDetails.html",
+        "src/modifyCompany.html"
     ],
     "type": "module",
     "scripts": {
