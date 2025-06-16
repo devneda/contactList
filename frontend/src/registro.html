@@ -19,35 +19,16 @@
             <li class='nav-item'>
                 <a class='nav-link' href='./modify.html'>Modificar</a>
             </li>
+            <li class= 'nav-item'>
+                <a class='nav-link' href='./empresa.html'>Empresas</a>
+            </li>
         </ul>
-        <h1>Registrar un contacto</h1>
-        <form action="http://localhost:8080/contacts">
-            <div class="mb-3">
-                <label for="name" class="form-label">Nombre</label>
-                <input class="form-control" type="text" id="name"/>
-            </div>
-            <div class="mb-3">
-                <label for="lastname" class="form-label">Apellidos</label>
-                <input class="form-control" type="text" id="lastname"/>
-            </div>
-            <div class="mb-3">
-                <label for="phone" class="form-label">Teléfono</label>
-                <input class="form-control" type="text" id="phone"/>
-            </div>
-            <div class="mb-3">
-                <label for="email" class="form-label">Correo electrónico</label>
-                <input class="form-control" type="text" id="email"/>
-            </div>
-            <div class="mb-3">
-                <label for="birthday" class="form-label">Cumpleaños</label>
-                <input class="form-control" type="text" id="birthday"/>
-            </div>
-            <!-- <div class="mb-3">
-                <label for="image" class="form-label">Imagen</label>
-                <input class="form-control" type="file" id="image"/>
-            </div> -->
-            <button type="button" class="btn btn-primary" onclick="addContact()">Registrar</button>
-        </form>
+        <h1>Registrar</h1>
+        <div class="mb-4">
+            <button class="btn btn-outline-primary me-2" onclick="mostrarFormulario('contacto')">Registrar contacto</button>
+            <button class="btn btn-outline-secondary" onclick="mostrarFormulario('empresa')">Registrar empresa</button>
+        </div>
+        <div id="formulario-container"></div>
     </div>
 </body>
 </html>
