@@ -6,7 +6,7 @@ stop-dev-env:
 
 wait-for-db:
 	@echo "Esperando a que MariaDB esté healthy..."
-	@timeout=60; \
+	@timeout=80; \
 	while [ "$$(docker inspect -f '{{.State.Health.Status}}' contacts-db-dev)" != "healthy" ]; do \
 		sleep 2; \
 		timeout=$$((timeout - 2)); \
