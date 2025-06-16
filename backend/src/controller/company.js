@@ -60,7 +60,18 @@ const putCompany = (async (req, res) => {
 
 const deleteCompany = (async (req, res) => {
     //TODO Validaciones y comprobaciones
-    await removeCompany(req.params.id);
+    const companyId = parseInt(req.params.id);
+    if (!Number.isInteger(companyId) || companyId <= 0) {
+        return res.status(400).json({ status: 'bad-request', message: 'El ID de la empresa debe ser un número entero' });
+    }
+    
+    const removed = await removeCompany(companyId);
+    if (!removed) {
+        return res.status(404).json({
+            status: 'not-found',
+            message: 'Company not found'
+        });
+    }
 
     res.status(204).json({});
 });
