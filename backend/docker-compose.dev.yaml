@@ -17,7 +17,7 @@ services:
     volumes:
       - ./db:/docker-entrypoint-initdb.d
     healthcheck:
-      test: ["CMD", "mysql", "ping", "-uuser", "-ppassword"]
+      test: ["CMD", "mysql", "-uuser", "-ppassword", "-e", "SELECT 1"]
       interval: 5s
       timeout: 3s
       retries: 6
