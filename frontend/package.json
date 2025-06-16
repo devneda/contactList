@@ -15,6 +15,7 @@
         "start": "parcel --no-cache",
         "build": "parcel build"
     },
+    "proxy": "http://localhost:8080",
     "devDependencies": {
         "buffer": "^6.0.3",
         "parcel": "latest",

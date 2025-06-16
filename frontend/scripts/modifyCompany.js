@@ -1,6 +1,10 @@
 import axios from 'axios';
 import { notifyError, notifyOk} from '../scripts/dialogUtils.js';
 import { el } from '../scripts/documentUtils.js';
+const baseURL =
+    window.location.hostname === 'localhost'
+        ? 'http://localhost:8080/api'
+        : '/api';
 
 window.fillCompanies = function() {
     const params = new URLSearchParams(window.location.search);
@@ -11,7 +15,7 @@ window.fillCompanies = function() {
         return;
     }
 
-    axios.get(`http://localhost:8080/companies/${companyId}`)
+    axios.get(`${baseURL}/companies/${companyId}`)
         .then((response) => {
             const company = response.data;
             el('companyName').value = company.companyName;
@@ -37,7 +41,7 @@ window.modifyCompany = function() {
         "email": el('email').value
     };
 
-    axios.put(`http://localhost:8080/companies/${window.currentcompanyId}`, companyData)
+    axios.put(`${baseURL}/companies/${window.currentcompanyId}`, companyData)
         .then((response) => {
             window.location.href = './empresa.html';
             notifyOk('Los datos se han actualizado correctamente');

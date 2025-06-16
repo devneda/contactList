@@ -1,6 +1,11 @@
 import axios from 'axios';
 import { el } from '../scripts/documentUtils.js';
-import { notifyOk, notifyError } from '../scripts/dialogUtils.js'
+import { notifyOk, notifyError } from '../scripts/dialogUtils.js';
+const baseURL =
+    window.location.hostname === 'localhost'
+        ? 'http://localhost:8080/api'
+        : '/api';
+
 
 window.cargarContacto = function() {
     const params = new URLSearchParams(window.location.search);
@@ -11,7 +16,7 @@ window.cargarContacto = function() {
         return;
     };
 
-    axios.get(`http://localhost:8080/contacts/${contactId}`)
+    axios.get(`${baseURL}/contacts/${contactId}`)
         .then((response) => {
             const contact = response.data;
             el('name').textContent = contact.name;

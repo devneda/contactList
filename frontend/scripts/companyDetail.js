@@ -1,6 +1,10 @@
 import axios from 'axios';
 import { el } from '../scripts/documentUtils.js';
-import { notifyOk, notifyError } from '../scripts/dialogUtils.js'
+import { notifyOk, notifyError } from '../scripts/dialogUtils.js';
+const baseURL =
+    window.location.hostname === 'localhost'
+        ? 'http://localhost:8080/api'
+        : '/api';
 
 window.cargarCompany = function() {
     const params = new URLSearchParams(window.location.search);
@@ -11,7 +15,7 @@ window.cargarCompany = function() {
         return;
     };
 
-    axios.get(`http://localhost:8080/companies/${companyId}`)
+    axios.get(`${baseURL}/companies/${companyId}`)
         .then((response) => {
             const company = response.data;
             el('companyName').textContent = company.companyName;
