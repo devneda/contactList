@@ -11,8 +11,8 @@ const app = express();
 app.use(express.json());
 app.use(cors());
 
-app.use('/', contacts);
-app.use('/', companies);
+app.use('/api', contacts);
+app.use('/api', companies);
 
 app.listen(config.service.port, () => {
     console.log('El backend ha iniciado en el puerto ' + config.service.port + '.')
